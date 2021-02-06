@@ -30,6 +30,12 @@ public class OfferEntity extends BaseEntityWithPicture {
     @Column
     private Integer year;
 
+    @ManyToOne
+    private UserEntity seller;
+
+    @ManyToOne
+    private ModelEntity model;
+
     public OfferEntity() {
     }
 
@@ -84,6 +90,24 @@ public class OfferEntity extends BaseEntityWithPicture {
 
     public OfferEntity setYear(Integer year) {
         this.year = year;
+        return this;
+    }
+
+    public UserEntity getSeller() {
+        return seller;
+    }
+
+    public OfferEntity setSeller(UserEntity seller) {
+        this.seller = seller;
+        return this;
+    }
+
+    public ModelEntity getModel() {
+        return model;
+    }
+
+    public OfferEntity setModel(ModelEntity model) {
+        this.model = model;
         return this;
     }
 
