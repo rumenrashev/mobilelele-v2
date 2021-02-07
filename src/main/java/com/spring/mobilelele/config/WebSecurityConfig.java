@@ -11,12 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import static com.spring.mobilelele.common.GlobalConstants.*;
-import static com.spring.mobilelele.common.GlobalConstants.INDEX_PATH;
-import static com.spring.mobilelele.common.GlobalConstants.LOGIN_ERROR_PATH;
-import static com.spring.mobilelele.common.GlobalConstants.LOGIN_PATH;
-import static com.spring.mobilelele.common.GlobalConstants.LOGOUT_PATH;
-import static com.spring.mobilelele.common.GlobalConstants.REGISTER_PATH;
+import static com.spring.mobilelele.constant.GlobalConstants.*;
 
 @Configuration
 @EnableWebSecurity
