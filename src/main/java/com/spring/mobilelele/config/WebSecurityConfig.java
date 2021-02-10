@@ -16,24 +16,24 @@ import static com.spring.mobilelele.constant.GlobalConstants.*;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+//
+//    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+//    private final UserDetailsService userDetailsService;
 
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-    private final UserDetailsService userDetailsService;
-
-    @Autowired
-    public WebSecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder,
-                             @Qualifier("userLoginService") UserDetailsService userDetailsService) {
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.userDetailsService = userDetailsService;
-    }
+//    @Autowired
+//    public WebSecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder,
+//                             @Qualifier("userLoginService") UserDetailsService userDetailsService) {
+//        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+//        this.userDetailsService = userDetailsService;
+//    }
 
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(bCryptPasswordEncoder);
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth
+//                .userDetailsService(userDetailsService)
+//                .passwordEncoder(bCryptPasswordEncoder);
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -42,8 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.
                 authorizeRequests()
                 .antMatchers("/static/**", "/css/**", "/img/**","/js/**").permitAll()
-                .antMatchers(LOGIN_PATH,LOGIN_ERROR_PATH,REGISTER_PATH).anonymous()
-                .antMatchers(INDEX_PATH).permitAll()
+//                .antMatchers(LOGIN_PATH,LOGIN_ERROR_PATH,REGISTER_PATH).anonymous()
+                .antMatchers(INDEX_PATH,LOGIN_PATH,REGISTER_PATH).permitAll()
                 .anyRequest()
                 .authenticated()
                 .and().csrf().disable()

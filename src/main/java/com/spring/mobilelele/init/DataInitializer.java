@@ -42,14 +42,14 @@ public class DataInitializer implements CommandLineRunner {
         List<AuthorityEntity> authorities = this.seedAllAuthoritiesFromAuthorityEnum();
         AuthorityEntity userAuthority = authorities.get(1);
         UserEntity admin = this.createUser(
-                "admin",
+                "admin@email.com",
                 "Asen",
                 "Asenov",
                 "adminPassword",
                 authorities,
                 "adminImageUrl");
         UserEntity user = this.createUser(
-                "user",
+                "user@email.com",
                 "Boris",
                 "Borisov",
                 "userPassword",
@@ -98,18 +98,18 @@ public class DataInitializer implements CommandLineRunner {
         return this.authorityRepository.findAll();
     }
 
-    private UserEntity createUser(String username, String firstName,
+    private UserEntity createUser(String email, String firstName,
                                   String lastName, String password,
                                   List<AuthorityEntity> authorities,
                                   String imageUrl) {
 
-        Optional<UserEntity> optionalUser = this.userRepository.findByUsername(username);
+        Optional<UserEntity> optionalUser = this.userRepository.findByEmail(email);
         if (optionalUser.isPresent()){
             return optionalUser.get();
         }
         UserEntity user = new UserEntity();
         user
-                .setUsername(username)
+                .setEmail(email)
                 .setPassword(password)
                 .setFirstName(firstName)
                 .setLastName(lastName)

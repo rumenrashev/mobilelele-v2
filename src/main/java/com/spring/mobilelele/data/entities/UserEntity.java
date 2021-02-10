@@ -10,7 +10,7 @@ import java.util.Set;
 public class UserEntity extends BaseEntityWithPicture {
 
     @Column(nullable = false, unique = true)
-    private String username;
+    private String email;
 
     @Column(nullable = false)
     private String password;
@@ -36,12 +36,12 @@ public class UserEntity extends BaseEntityWithPicture {
     public UserEntity() {
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmail() {
+        return email;
     }
 
-    public UserEntity setUsername(String username) {
-        this.username = username;
+    public UserEntity setEmail(String email) {
+        this.email = email;
         return this;
     }
 
@@ -104,7 +104,7 @@ public class UserEntity extends BaseEntityWithPicture {
     public String toString() {
         final StringBuilder sb = new StringBuilder("UserEntity{");
         sb.append(super.toString());
-        sb.append("username='").append(username).append('\'');
+        sb.append("email='").append(email).append('\'');
         sb.append(", password='").append(password).append('\'');
         sb.append(", firstName='").append(firstName).append('\'');
         sb.append(", lastName='").append(lastName).append('\'');

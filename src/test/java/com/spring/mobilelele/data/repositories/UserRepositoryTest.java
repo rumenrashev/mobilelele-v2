@@ -1,6 +1,8 @@
 package com.spring.mobilelele.data.repositories;
 
 import com.spring.mobilelele.data.entities.UserEntity;
+import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -8,21 +10,22 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.Optional;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class UserRepositoryTest {
 
     private final UserRepository userRepository;
-    private static final String existingUsername;
+    private static final String existingEmail;
     private static final UserEntity existingUserEntity;
-    private static final String fakeUsername;
+    private static final String fakeEmail;
 
     static {
-        existingUsername = "username";
+        existingEmail = "email@email.com";
         existingUserEntity = new UserEntity();
         existingUserEntity
-                .setUsername(existingUsername)
+                .setEmail(existingEmail)
                 .setActive(true)
                 .setFirstName("first")
                 .setLastName("last")
@@ -31,7 +34,7 @@ class UserRepositoryTest {
                 .setImageUrl("userImageUrl")
                 .setCreated(Instant.now())
                 .setModified(Instant.now());
-        fakeUsername = "fakeUsername";
+        fakeEmail = "fakeUsername";
     }
 
 
@@ -39,6 +42,26 @@ class UserRepositoryTest {
     @Autowired
     UserRepositoryTest(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @BeforeEach
+    void setUp(){
+        this.userRepository.saveAndFlush(existingUserEntity);
+    }
+
+    @Test
+    public void findByEmailShouldReturnCorrectEntity(){
+        Optional<UserEntity> optionalUserEntity =
+                this.userRepository.findByEmail(existingEmail);
+        Assert.assertTrue(optionalUserEntity.isPresent());
+        Assert.assertEquals(existingEmail,optionalUserEntity.get().getEmail());
+    }
+
+    @Test
+    public void findByEmailShouldReturnEmptyOptional(){
+        Optional<UserEntity> optionalUserEntity =
+                this.userRepository.findByEmail(fakeEmail);
+        Assert.assertTrue(optionalUserEntity.isEmpty());
     }
 
 }
