@@ -1,7 +1,7 @@
-package com.spring.mobilelele.data.repositories;
+package com.spring.mobilelele.repositories;
 
 import com.spring.mobilelele.constant.enums.CategoryEnum;
-import com.spring.mobilelele.data.entities.ModelEntity;
+import com.spring.mobilelele.models.entities.ModelEntity;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

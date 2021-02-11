@@ -1,6 +1,6 @@
-package com.spring.mobilelele.data.entities;
+package com.spring.mobilelele.models.entities;
 
-import com.spring.mobilelele.data.entities.base.BaseEntityWithPicture;
+import com.spring.mobilelele.models.entities.base.BaseEntityWithPicture;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -24,7 +24,7 @@ public class UserEntity extends BaseEntityWithPicture {
     @Column(nullable = false)
     private Boolean isActive;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_authorities",
             joinColumns = @JoinColumn(name = "users_id"),

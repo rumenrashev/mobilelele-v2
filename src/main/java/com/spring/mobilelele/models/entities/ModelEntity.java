@@ -1,7 +1,7 @@
-package com.spring.mobilelele.data.entities;
+package com.spring.mobilelele.models.entities;
 
 import com.spring.mobilelele.constant.enums.CategoryEnum;
-import com.spring.mobilelele.data.entities.base.BaseEntityWithPicture;
+import com.spring.mobilelele.models.entities.base.BaseEntityWithPicture;
 
 import javax.persistence.*;
 

@@ -1,6 +1,6 @@
 package com.spring.mobilelele.service.validations.impl;
 
-import com.spring.mobilelele.data.repositories.UserRepository;
+import com.spring.mobilelele.repositories.UserRepository;
 import com.spring.mobilelele.service.validations.anotations.UniqueEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 

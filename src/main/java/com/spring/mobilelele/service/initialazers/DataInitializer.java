@@ -1,17 +1,17 @@
-package com.spring.mobilelele.init;
+package com.spring.mobilelele.service.initialazers;
 
 import com.spring.mobilelele.constant.enums.AuthorityEnum;
 import com.spring.mobilelele.constant.enums.CategoryEnum;
 import com.spring.mobilelele.constant.enums.EngineEnum;
 import com.spring.mobilelele.constant.enums.TransmissionEnum;
-import com.spring.mobilelele.data.entities.*;
-import com.spring.mobilelele.data.repositories.*;
+import com.spring.mobilelele.models.entities.*;
+import com.spring.mobilelele.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.time.Instant;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.List;
@@ -25,16 +25,18 @@ public class DataInitializer implements CommandLineRunner {
     private final BrandRepository brandRepository;
     private final ModelRepository modelRepository;
     private final OfferRepository offerRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     public DataInitializer(AuthorityRepository authorityRepository, UserRepository userRepository,
                            BrandRepository brandRepository, ModelRepository modelRepository,
-                           OfferRepository offerRepository) {
+                           OfferRepository offerRepository, BCryptPasswordEncoder passwordEncoder) {
         this.authorityRepository = authorityRepository;
         this.userRepository = userRepository;
         this.brandRepository = brandRepository;
         this.modelRepository = modelRepository;
         this.offerRepository = offerRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -45,14 +47,14 @@ public class DataInitializer implements CommandLineRunner {
                 "admin@email.com",
                 "Asen",
                 "Asenov",
-                "adminPassword",
+                this.passwordEncoder.encode("admin"),
                 authorities,
                 "adminImageUrl");
         UserEntity user = this.createUser(
                 "user@email.com",
                 "Boris",
                 "Borisov",
-                "userPassword",
+                this.passwordEncoder.encode("user"),
                 List.of(userAuthority),
                 "userImageUrl");
         BrandEntity brand = this.createBrand("Mercedes-Benz");
@@ -88,9 +90,7 @@ public class DataInitializer implements CommandLineRunner {
                             if (this.authorityRepository.findByAuthority(a).isEmpty()) {
                                 AuthorityEntity authorityEntity = new AuthorityEntity();
                                 authorityEntity
-                                        .setAuthority(a)
-                                        .setCreated(Instant.now())
-                                        .setModified(Instant.now());
+                                        .setAuthority(a);
                                 this.authorityRepository.saveAndFlush(authorityEntity);
                             }
                         }
@@ -115,9 +115,7 @@ public class DataInitializer implements CommandLineRunner {
                 .setLastName(lastName)
                 .setAuthorities(new HashSet<>(authorities))
                 .setActive(true)
-                .setImageUrl(imageUrl)
-                .setCreated(Instant.now())
-                .setModified(Instant.now());
+                .setImageUrl(imageUrl);
         return this.userRepository.saveAndFlush(user);
     }
 
@@ -128,9 +126,7 @@ public class DataInitializer implements CommandLineRunner {
         }
         BrandEntity brand = new BrandEntity();
         brand
-                .setName(name)
-                .setCreated(Instant.now())
-                .setModified(Instant.now());
+                .setName(name);
         return this.brandRepository.saveAndFlush(brand);
     }
 
@@ -147,9 +143,7 @@ public class DataInitializer implements CommandLineRunner {
                 .setCategory(category)
                 .setStartYear(startYear)
                 .setEndYear(endYear)
-                .setImageUrl(imageUrl)
-                .setCreated(Instant.now())
-                .setModified(Instant.now());
+                .setImageUrl(imageUrl);
         return this.modelRepository.saveAndFlush(model);
     }
 
@@ -172,9 +166,7 @@ public class DataInitializer implements CommandLineRunner {
                 .setTransmission(transmission)
                 .setSeller(seller)
                 .setModel(model)
-                .setImageUrl(imageUrl)
-                .setCreated(Instant.now())
-                .setModified(Instant.now());
+                .setImageUrl(imageUrl);
         return this.offerRepository.saveAndFlush(offer);
     }
 }

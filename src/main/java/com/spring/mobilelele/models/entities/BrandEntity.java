@@ -1,6 +1,6 @@
-package com.spring.mobilelele.data.entities;
+package com.spring.mobilelele.models.entities;
 
-import com.spring.mobilelele.data.entities.base.BaseEntity;
+import com.spring.mobilelele.models.entities.base.BaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

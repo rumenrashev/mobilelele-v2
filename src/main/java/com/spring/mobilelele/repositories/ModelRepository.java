@@ -1,6 +1,6 @@
-package com.spring.mobilelele.data.repositories;
+package com.spring.mobilelele.repositories;
 
-import com.spring.mobilelele.data.entities.ModelEntity;
+import com.spring.mobilelele.models.entities.ModelEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

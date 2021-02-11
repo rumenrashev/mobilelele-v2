@@ -1,12 +1,11 @@
-package com.spring.mobilelele.data.entities;
+package com.spring.mobilelele.models.entities;
 
 import com.spring.mobilelele.constant.enums.EngineEnum;
 import com.spring.mobilelele.constant.enums.TransmissionEnum;
-import com.spring.mobilelele.data.entities.base.BaseEntityWithPicture;
+import com.spring.mobilelele.models.entities.base.BaseEntityWithPicture;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Objects;
 
 @Entity
 @Table(name = "offers")

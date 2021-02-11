@@ -1,6 +1,6 @@
-package com.spring.mobilelele.data.repositories;
+package com.spring.mobilelele.repositories;
 
-import com.spring.mobilelele.data.entities.BrandEntity;
+import com.spring.mobilelele.models.entities.BrandEntity;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

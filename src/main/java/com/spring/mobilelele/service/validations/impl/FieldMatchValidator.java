@@ -22,9 +22,16 @@ public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Obje
 
     @Override
     public boolean isValid(final Object object, final ConstraintValidatorContext context) {
-        Field firstField = getFiledByName(object, firstFieldName);
-        Field secondFiled = getFiledByName(object, secondFieldName);
-        if (!firstField.equals(secondFiled)) {
+
+        Object firstField , secondField;
+        try {
+            firstField = getFiledByName(object, firstFieldName);
+            secondField = getFiledByName(object, secondFieldName);
+        }catch (NoSuchFieldException | IllegalAccessException e){
+            e.printStackTrace();
+            return false;
+        }
+        if (!firstField.equals(secondField)) {
             context.disableDefaultConstraintViolation();
             context.buildConstraintViolationWithTemplate(String.format(message,firstFieldName))
                     .addPropertyNode(secondFieldName)
@@ -34,12 +41,11 @@ public class FieldMatchValidator implements ConstraintValidator<FieldMatch, Obje
         return true;
     }
 
-    private Field getFiledByName(Object object, String fieldName) {
-        try {
-            return object.getClass().getDeclaredField(fieldName);
-        } catch (NoSuchFieldException exception) {
-            exception.printStackTrace();
-        }
-        return null;
+    private Object getFiledByName(Object object, String fieldName)
+            throws NoSuchFieldException, IllegalAccessException {
+
+            Field field = object.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            return field.get(object);
     }
 }

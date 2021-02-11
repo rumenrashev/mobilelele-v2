@@ -1,8 +1,7 @@
-package com.spring.mobilelele.data.entities.base;
+package com.spring.mobilelele.models.entities.base;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import java.util.Objects;
 
 @MappedSuperclass
 public class BaseEntityWithPicture extends BaseEntity{

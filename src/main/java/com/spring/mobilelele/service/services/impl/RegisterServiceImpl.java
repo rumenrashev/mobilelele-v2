@@ -1,10 +1,10 @@
 package com.spring.mobilelele.service.services.impl;
 
 import com.spring.mobilelele.constant.enums.AuthorityEnum;
-import com.spring.mobilelele.data.entities.AuthorityEntity;
-import com.spring.mobilelele.data.entities.UserEntity;
-import com.spring.mobilelele.data.repositories.AuthorityRepository;
-import com.spring.mobilelele.data.repositories.UserRepository;
+import com.spring.mobilelele.models.entities.AuthorityEntity;
+import com.spring.mobilelele.models.entities.UserEntity;
+import com.spring.mobilelele.repositories.AuthorityRepository;
+import com.spring.mobilelele.repositories.UserRepository;
 import com.spring.mobilelele.exceptions.AuthorityNotFoundException;
 import com.spring.mobilelele.service.models.RegisterServiceModel;
 import com.spring.mobilelele.service.services.RegisterService;

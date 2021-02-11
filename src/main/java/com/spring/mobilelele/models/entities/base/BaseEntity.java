@@ -1,4 +1,4 @@
-package com.spring.mobilelele.data.entities.base;
+package com.spring.mobilelele.models.entities.base;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -28,6 +28,17 @@ public class BaseEntity {
     public BaseEntity setId(Long id) {
         this.id = id;
         return this;
+    }
+
+    @PrePersist
+    public void prePersist(){
+        setCreated(Instant.now());
+        setModified(Instant.now());
+    }
+
+    @PreUpdate
+    public void preUpdate(){
+        setModified(Instant.now());
     }
 
     public Instant getCreated() {

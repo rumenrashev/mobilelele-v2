@@ -16,24 +16,24 @@ import static com.spring.mobilelele.constant.GlobalConstants.*;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-//
-//    private final BCryptPasswordEncoder bCryptPasswordEncoder;
-//    private final UserDetailsService userDetailsService;
 
-//    @Autowired
-//    public WebSecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder,
-//                             @Qualifier("userLoginService") UserDetailsService userDetailsService) {
-//        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-//        this.userDetailsService = userDetailsService;
-//    }
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final UserDetailsService userDetailsService;
+
+    @Autowired
+    public WebSecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder,
+                             @Qualifier("loginService") UserDetailsService userDetailsService) {
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.userDetailsService = userDetailsService;
+    }
 
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth
-//                .userDetailsService(userDetailsService)
-//                .passwordEncoder(bCryptPasswordEncoder);
-//    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(bCryptPasswordEncoder);
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage(LOGIN_PATH)
                 .failureUrl(LOGIN_ERROR_PATH)
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl(INDEX_PATH)
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .and().logout()
